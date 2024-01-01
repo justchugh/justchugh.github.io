@@ -6,7 +6,7 @@ from git import Repo
 from datetime import datetime
 import pytz
 
-repo_dir = '/Users/snehalraj/Desktop/GITHUB/test'
+repo_dir = '/Users/snehalraj/Desktop/GITHUB/webfolio'
 ny_tz = pytz.timezone('America/New_York')  # New York Timezone
 
 # --------------------------------------------------------------------------------------------------------
