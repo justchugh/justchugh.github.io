@@ -7,6 +7,7 @@ from datetime import datetime
 import pytz
 
 repo_dir = '/Users/snehalraj/Desktop/GITHUB/webfolio/'
+sub_dir = 'assets/'  # Path to your target subdirectory
 ny_tz = pytz.timezone('America/New_York')  # New York Timezone
 
 # --------------------------------------------------------------------------------------------------------
@@ -19,7 +20,7 @@ def copy_file_or_folder(src, dst):
 
 def perform_commit(date, time, file_path, repo_dir):
     filename = os.path.basename(file_path)
-    new_file_path = os.path.join(repo_dir, filename)
+    new_file_path = os.path.join(repo_dir, sub_dir, filename)
     copy_file_or_folder(file_path, new_file_path)
     repo = Repo(repo_dir)
     
