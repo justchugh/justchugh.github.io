@@ -7,7 +7,8 @@ from datetime import datetime
 import pytz
 
 repo_dir = '/Users/snehalraj/Desktop/GITHUB/webfolio/'
-sub_dir = 'assets/images/companies/'  # Path to your target subdirectory
+sub_dir = 'assets/images/'  # Path to your target subdirectory
+commit_message = 'working on icons'  # Define your commit message
 ny_tz = pytz.timezone('America/New_York')  # New York Timezone
 
 # --------------------------------------------------------------------------------------------------------
@@ -33,7 +34,7 @@ def perform_commit(date, time, file_path, repo_dir):
     # Commit using the UTC time
     date_time_str = utc_time.strftime("%Y-%m-%dT%H:%M:%S")
     repo.git.add(all=True)
-    repo.index.commit("Commit message", author_date=date_time_str, commit_date=date_time_str)
+    repo.index.commit(commit_message, author_date=date_time_str, commit_date=date_time_str)
     repo.git.push()
 
 # --------------------------------------------------------------------------------------------------------
