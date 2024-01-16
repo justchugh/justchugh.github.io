@@ -8,7 +8,7 @@ import pytz
 
 repo_dir = '/Users/snehalraj/Desktop/GITHUB/webfolio/'
 sub_dir = 'assets/images/'  # Path to your target subdirectory
-commit_message = 'adding my pics'  # Define your commit message
+commit_message = 'working on projects'  # Define your commit message
 ny_tz = pytz.timezone('America/New_York')  # New York Timezone
 
 # --------------------------------------------------------------------------------------------------------
