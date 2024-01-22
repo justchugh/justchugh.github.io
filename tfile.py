@@ -7,7 +7,7 @@ from datetime import datetime
 import pytz
 
 repo_dir = '/Users/snehalraj/Desktop/GITHUB/webfolio/'
-sub_dir = 'assets/images/'  # Path to your target subdirectory
+sub_dir = 'assets/images/uni/'  # Path to your target subdirectory
 commit_message = 'working on university images'  # Define your commit message
 ny_tz = pytz.timezone('America/New_York')  # New York Timezone
 
