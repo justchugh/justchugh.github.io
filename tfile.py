@@ -7,7 +7,7 @@ from datetime import datetime
 import pytz
 
 repo_dir = '/Users/snehalraj/Desktop/GITHUB/webfolio/'
-sub_dir = 'assets/'  # Path to your target subdirectory
+sub_dir = 'assets/js/'  # Path to your target subdirectory
 commit_message = 'working on js'  # Define your commit message
 ny_tz = pytz.timezone('America/New_York')  # New York Timezone
 
