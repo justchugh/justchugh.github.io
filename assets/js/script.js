@@ -2,107 +2,60 @@
 
 // Sidebar Toggle for Mobile
 const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-sidebarBtn.addEventListener("click", function () { 
-    sidebar.classList.toggle("active");
-});
+document.querySelector("[data-sidebar-btn]").addEventListener("click", () => sidebar.classList.toggle("active"));
 
 // Modal Functionality for Testimonials
-const modalContainer = document.querySelector("[data-modal-container]");
-const overlay = document.querySelector("[data-overlay]");
-const modalCloseBtn = document.querySelector("[data-modal-close-btn]");
-const modalImg = document.querySelector("[data-modal-img]");
-const modalTitle = document.querySelector("[data-modal-title]");
-const modalText = document.querySelector("[data-modal-text]");
-const testimonialsItem = document.querySelectorAll("[data-testimonials-item]");
+const modal = { container: document.querySelector("[data-modal-container]"), overlay: document.querySelector("[data-overlay]") };
+const toggleModal = () => [modal.container, modal.overlay].forEach(el => el.classList.toggle("active"));
 
-function toggleModal() {
-    modalContainer.classList.toggle("active");
-    overlay.classList.toggle("active");
-}
+[document.querySelector("[data-modal-close-btn]"), modal.overlay].forEach(el => el.addEventListener("click", toggleModal));
 
-modalCloseBtn.addEventListener("click", toggleModal);
-overlay.addEventListener("click", toggleModal);
-
-testimonialsItem.forEach(item => {
-    item.addEventListener("click", function () {
-        modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-        modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-        modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-        modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
+document.querySelectorAll("[data-testimonials-item]").forEach(item => {
+    item.addEventListener("click", () => {
+        ["src", "alt", "innerHTML"].forEach(attr => document.querySelector(`[data-modal-${attr}]`)[attr] = item.querySelector(`[data-testimonials-${attr}]`)[attr]);
         toggleModal();
     });
 });
 
 // Custom Select Dropdown for Portfolio Filter
 const select = document.querySelector("[data-select]");
-const selectItems = document.querySelectorAll("[data-select-item]");
-const selectValue = document.querySelector("[data-selecct-value]");
-const filterItems = document.querySelectorAll("[data-filter-item]");
-const filterBtn = document.querySelectorAll("[data-filter-btn]");
-let lastClickedBtn = filterBtn[0];
+select.addEventListener("click", () => select.classList.toggle("active"));
 
-select.addEventListener("click", function () { 
-    this.classList.toggle("active");
-});
-
-selectItems.forEach(item => {
+document.querySelectorAll("[data-select-item]").forEach(item => {
     item.addEventListener("click", function () {
-        const selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
+        const value = this.innerText.toLowerCase();
+        document.querySelector("[data-selecct-value]").innerText = this.innerText;
         select.classList.toggle("active");
-        filterFunc(selectedValue);
+        filterFunc(value);
     });
 });
 
-function filterFunc(selectedValue) {
-    filterItems.forEach(item => {
-        const categories = item.dataset.category.split(',').map(cat => cat.trim().toLowerCase());
-        if (selectedValue === "all" || categories.includes(selectedValue)) {
-            item.classList.add("active");
-        } else {
-            item.classList.remove("active");
-        }
-    });
-}
+const filterFunc = value => document.querySelectorAll("[data-filter-item]").forEach(item => item.classList.toggle("active", value === "all" || item.dataset.category.split(',').map(cat => cat.trim().toLowerCase()).includes(value)));
 
+const filterBtn = document.querySelectorAll("[data-filter-btn]");
+let lastBtn = filterBtn[0];
 filterBtn.forEach(btn => {
     btn.addEventListener("click", function () {
-        const selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
-        filterFunc(selectedValue);
-        lastClickedBtn.classList.remove("active");
-        this.classList.add("active");
-        lastClickedBtn = this;
+        const value = this.innerText.toLowerCase();
+        document.querySelector("[data-selecct-value]").innerText = this.innerText;
+        filterFunc(value);
+        [lastBtn, this].forEach(el => el.classList.toggle("active"));
+        lastBtn = this;
     });
 });
 
 // Contact Form Validation
-const form = document.querySelector("[data-form]");
-const formInputs = document.querySelectorAll("[data-form-input]");
-const formBtn = document.querySelector("[data-form-btn]");
-
-formInputs.forEach(input => {
-    input.addEventListener("input", function () {
-        formBtn.disabled = !form.checkValidity();
-    });
+document.querySelectorAll("[data-form-input]").forEach(input => {
+    input.addEventListener("input", () => document.querySelector("[data-form-btn]").disabled = !document.querySelector("[data-form]").checkValidity());
 });
 
 // Page Navigation
-const navigationLinks = document.querySelectorAll("[data-nav-link]");
-const pages = document.querySelectorAll("[data-page]");
-
-navigationLinks.forEach((link, index) => {
-    link.addEventListener("click", function () {
-        pages.forEach((page, pageIndex) => {
-            if (pageIndex === index) {
-                page.classList.add("active");
-                link.classList.add("active");
-                window.scrollTo(0, 0);
-            } else {
-                page.classList.remove("active");
-                navigationLinks[pageIndex].classList.remove("active");
-            }
+const navigation = { links: document.querySelectorAll("[data-nav-link]"), pages: document.querySelectorAll("[data-page]") };
+navigation.links.forEach((link, index) => {
+    link.addEventListener("click", () => {
+        navigation.pages.forEach((page, pageIndex) => {
+            [page, navigation.links[pageIndex]].forEach(el => el.classList.toggle("active", pageIndex === index));
         });
+        window.scrollTo(0, 0);
     });
 });
