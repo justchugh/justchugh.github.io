@@ -7,6 +7,16 @@ sidebarBtn.addEventListener("click", function () {
     sidebar.classList.toggle("active");
 });
 
+document.querySelectorAll('.social-image').forEach(item => {
+    item.addEventListener('mouseover', function() {
+      this.src = this.getAttribute('data-hover');
+    });
+  
+    item.addEventListener('mouseout', function() {
+      this.src = this.getAttribute('src').replace('-white', '');
+    });
+  });
+
 // Modal Functionality for Testimonials
 const modalContainer = document.querySelector("[data-modal-container]");
 const overlay = document.querySelector("[data-overlay]");
@@ -106,3 +116,7 @@ navigationLinks.forEach((link, index) => {
         });
     });
 });
+
+
+
+

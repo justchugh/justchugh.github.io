@@ -438,21 +438,37 @@ main {
 
 .social-list {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column; /* Organizes the .social-line divs in a column */
+  align-items: center; /* Centers the lines horizontally in the flex container */
+  gap: 20px; /* Increased space between the lines */
+  list-style: none; /* Removes default list styling */
+  padding-top: 10px;
   padding-bottom: 4px;
   padding-left: 7px;
 }
 
-.social-item .social-link {
-  color: var(--light-gray-70);
-  font-size: 18px;
+.social-line {
+  display: flex;
+  justify-content: center; /* Centers items horizontally within each line */
+  align-items: center; /* Centers items vertically within each line */
+  gap: 19px; /* Space between items in a line */
 }
 
 
-.social-item .social-link:hover { color: var(--light-gray); }
 
+.social-link {
+  font-size: 18px; /* Optional, based on your design */
+}
+
+.social-link .social-image {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+
+.social-link:hover .social-image {
+  transform: scale(1.1); /* Slightly increase the size */
+}
 
 
 
